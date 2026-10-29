@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **`markdown-preview-enhanced.mermaidEngine` setting to draw Mermaid diagrams with [Pele](https://pele.run/)** — `mermaid` (default) keeps today's behavior; `pele` draws every diagram with Pele, takes its colors and fonts from the editor theme (light and dark switch without reloading the preview), and falls back to Mermaid for a diagram Pele cannot draw. The Mermaid theme and configuration settings do not apply with `pele`. HTML/PDF/image export and the web version still use Mermaid.
+
 ## [0.8.40] - 2026-10-09
 
 ### Picked up from crossnote 0.9.42

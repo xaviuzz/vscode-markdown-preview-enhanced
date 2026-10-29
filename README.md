@@ -54,6 +54,10 @@ See the [Keybindings](#keybindings) table below for more shortcuts.
 
 If you have any questions about data handling, please [open an issue](https://github.com/shd101wyy/vscode-markdown-preview-enhanced/issues).
 
+## Mermaid engine
+
+Set `markdown-preview-enhanced.mermaidEngine` to `pele` to draw Mermaid diagrams with [Pele](https://pele.run/) instead of Mermaid. Pele takes its colors and fonts from the editor theme, so diagrams follow a switch between light and dark. A diagram Pele cannot draw falls back to Mermaid, and the Mermaid theme and configuration settings do not apply while `pele` is chosen. The default is `mermaid`. Export to HTML, PDF and images, and the web version, still use Mermaid.
+
 ## Documentation
 
 To check out the documentation, visit
