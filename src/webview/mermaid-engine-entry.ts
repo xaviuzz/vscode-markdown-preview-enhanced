@@ -5,6 +5,7 @@ import {
   DiagramResult,
   MermaidEngineAdapter,
 } from './mermaid-engine-adapter';
+import { PeleTheme } from './pele-theme';
 
 interface MermaidWindow {
   mermaid: DiagramRenderer;
@@ -25,6 +26,8 @@ function readEngine(): MermaidEngine {
   }
   return engine;
 }
+
+new PeleTheme().install(document);
 
 const mermaidWindow = window as unknown as MermaidWindow;
 const originalMermaid: DiagramRenderer = {
