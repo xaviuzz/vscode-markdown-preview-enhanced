@@ -1,7 +1,7 @@
 const { execSync } = require('child_process');
 const { cpSync, existsSync, mkdirSync, readdirSync } = require('fs');
 const { join } = require('path');
-const { context, build } = require('esbuild');
+const { context, build, buildSync } = require('esbuild');
 const { polyfillNode } = require('esbuild-plugin-polyfill-node');
 
 /**
@@ -29,6 +29,7 @@ const esbuildProblemMatcherPlugin = {
         copyTikzjaxTexFiles();
         copyXhrSyncWorker();
         copyMarkdownYoWasm();
+        buildMermaidEngineWebview();
         console.log('[watch] build finished');
       }
     });
@@ -93,6 +94,19 @@ const serveCliConfig = {
   format: 'cjs',
   external: ['vscode'],
   plugins: [xhrSyncWorkerExternalPlugin],
+};
+
+/**
+ * @type {import('esbuild').BuildOptions}
+ */
+const mermaidEngineWebviewConfig = {
+  entryPoints: ['./src/webview/mermaid-engine-entry.ts'],
+  bundle: true,
+  minify: true,
+  platform: 'browser',
+  outfile: './crossnote/webview/mermaid-engine.js',
+  target: 'es2020',
+  format: 'iife',
 };
 
 // FIX:
@@ -267,6 +281,11 @@ function copyMarkdownYoWasm() {
   console.log('Copied markdown_yo WASM to out/native/');
 }
 
+function buildMermaidEngineWebview() {
+  buildSync(mermaidEngineWebviewConfig);
+  console.log('Built the Mermaid engine webview script to crossnote/webview/');
+}
+
 async function main() {
   try {
     // Watch mode
@@ -335,6 +354,7 @@ async function main() {
       copyTikzjaxTexFiles();
       copyXhrSyncWorker();
       copyMarkdownYoWasm();
+      buildMermaidEngineWebview();
     }
   } catch (error) {
     console.error(error);

@@ -38,7 +38,7 @@
     "run-in-browser:watch": "node build.js --web-dev && concurrently \"vscode-test-web --browser none --extensionDevelopmentPath=. ${SERVE_DIR:-.}\" \"npx http-server ./crossnote -p 6789 --cors\" \"node build.js --watch\"",
     "run-in-vscode-dev": "npx serve --cors -l 5000 --ssl-cert $HOME/certs/localhost.pem --ssl-key $HOME/certs/localhost-key.pem",
     "test": "pnpm test:unit",
-    "test:unit": "mocha --ui tdd --reporter spec test/find-fragment-target-line.test.js test/block-id-helpers.test.js test/rank-by-closeness.test.js test/current-preview-source.test.js test/preview-source-integration.test.js test/l10n-bundles.test.js test/native-runtime-compat.test.js test/crossnote-serve-output.test.js test/filesystem-root-warning.test.js test/custom-editor-options.test.js test/editor-associations.test.js test/custom-editor-single-preview.test.js test/trusted-script-roots.test.js test/mermaid-engine-setting.test.js test/mermaid-engine-adapter.test.js",
+    "test:unit": "mocha --ui tdd --reporter spec test/find-fragment-target-line.test.js test/block-id-helpers.test.js test/rank-by-closeness.test.js test/current-preview-source.test.js test/preview-source-integration.test.js test/l10n-bundles.test.js test/native-runtime-compat.test.js test/crossnote-serve-output.test.js test/filesystem-root-warning.test.js test/custom-editor-options.test.js test/editor-associations.test.js test/custom-editor-single-preview.test.js test/trusted-script-roots.test.js test/mermaid-engine-setting.test.js test/mermaid-engine-adapter.test.js test/mermaid-engine-script.test.js",
     "vscode:prepublish": "pnpm install --frozen-lockfile && pnpm build",
     "watch": "gulp copy-files && gulp clean-out && node build.js --watch"
   },
@@ -1034,6 +1034,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^15.5.2",
     "mocha": "^6.1.4",
+    "pele": "1.12.0",
     "prettier": "^3",
     "prettier-plugin-packagejson": "^3.0.2",
     "ts-loader": "^9.4.4",

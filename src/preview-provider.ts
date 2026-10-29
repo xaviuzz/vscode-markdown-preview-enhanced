@@ -9,7 +9,8 @@ import {
   getBlockTranslation,
   setBlockTranslation,
 } from './ai-translation-cache';
-import { getMPEConfig } from './config';
+import { getMPEConfig, MermaidEngine } from './config';
+import { MermaidEngineScript } from './mermaid-engine-script';
 import {
   PreviewSourceState,
   resolveActivePreviewSource,
@@ -804,8 +805,22 @@ export class PreviewProvider {
         head = `<link rel="stylesheet" href="${lightboxCssUri}"><script defer src="${lightboxJsUri}"></script>`;
       }
 
+      const mermaidEngineScriptUri = previewPanel.webview.asWebviewUri(
+        vscode.Uri.joinPath(
+          this.context.extensionUri,
+          'crossnote',
+          'webview',
+          'mermaid-engine.js',
+        ),
+      );
+      const mermaidEngineScript = new MermaidEngineScript(
+        getMPEConfig<MermaidEngine>('mermaidEngine') ?? 'mermaid',
+        mermaidEngineScriptUri.toString(),
+      );
+
       const html = await engine.generateHTMLTemplateForPreview({
         inputString,
+        scripts: mermaidEngineScript.html(),
         config: {
           sourceUri: sourceUri.toString(),
           cursorLine: initialLine,
