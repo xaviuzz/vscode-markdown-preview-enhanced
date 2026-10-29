@@ -20,6 +20,8 @@ import {
 import * as vscode from 'vscode';
 import { isVSCodeWebExtension } from './utils';
 
+export type MermaidEngine = 'mermaid' | 'pele';
+
 export enum PreviewColorScheme {
   selectedPreviewTheme = 'selectedPreviewTheme',
   systemColorScheme = 'systemColorScheme',
@@ -37,6 +39,7 @@ type VSCodeMPEConfigKey =
   | 'hideDefaultVSCodeMarkdownPreviewButtons'
   | 'liveUpdate'
   | 'liveUpdateDebounceMs'
+  | 'mermaidEngine'
   | 'previewColorScheme'
   | 'previewMode'
   | 'qiniuAccessKey'
@@ -82,6 +85,7 @@ export class MarkdownPreviewEnhancedConfig implements NotebookConfig {
   public readonly mathjaxScriptSrc: string;
   public readonly codeBlockTheme: CodeBlockTheme;
   public readonly mermaidTheme: MermaidTheme;
+  public readonly mermaidEngine: MermaidEngine;
   public readonly previewTheme: PreviewTheme;
   public readonly exportColorScheme: ExportColorScheme;
   public readonly revealjsTheme: RevealJsTheme;
@@ -203,6 +207,8 @@ export class MarkdownPreviewEnhancedConfig implements NotebookConfig {
       defaultConfig.frontMatterRenderingOption;
     this.mermaidTheme =
       getMPEConfig<MermaidTheme>('mermaidTheme') ?? defaultConfig.mermaidTheme;
+    this.mermaidEngine =
+      getMPEConfig<MermaidEngine>('mermaidEngine') ?? 'mermaid';
     this.mathRenderingOption =
       (getMPEConfig<string>('mathRenderingOption') as MathRenderingOption) ??
       defaultConfig.mathRenderingOption;
